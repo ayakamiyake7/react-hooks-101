@@ -1,62 +1,37 @@
 import React, {useState} from 'react'
 
-const App = () => {
-    const [count, setCount] = useState(0)
+const App = (props) => {
+    // const initialStates = {
+    //     name: '',
+    //     price: 1000,
+    // }
 
-    const increment = () => {
-        setCount(count + 1)
-    }
-    const decrement = () => {
-        setCount(count - 1)
-    }
-    const increment2 = () => {
-        setCount(previousCount => previousCount + 1)
-    }
-    const decrement2 = () =>{
-        setCount(previousCount => previousCount - 1)
-    }
+    const [name, setName] = useState(props.name)
+    const [price, setPrice] = useState(props.price)
+
     const reset = () => {
-        setCount(0)
+        setPrice(props.price)
+        setName(props.name)
     }
-    const multiply = () => {
-        setCount(previousCount => previousCount * 2)
-    }
-    const threeTimes = () => {
-        // if (count % 3 === 0) {
-        //     setCount(count / 3)
-        // } 
-        setCount(previousCount => {
-            if (previousCount % 3 === 0) {
-                return previousCount / 3
-            } else {
-                return previousCount
-            }
-        })
-    }
-
 
     return (
         <>
-            <div>
-                count: {count}
-            </div>
-            <button onClick={increment}>+1</button>
-            <button onClick={decrement}>-1</button>
+            <p>This is {name}'s {price}.</p>
+            <button onClick={()=> setPrice(price + 1)}>+1</button>
+            <button onClick={()=> setPrice(price - 1)}>-1</button>
+            <button onClick={reset}>Reset</button>
 
-            <div>
-            <button onClick={increment2}>+1</button>
-            <button onClick={decrement2}>-1</button>
-            </div>
+            <input value={name} onChange={e => setName(e.target.value)}/>
+            <button onClick={reset}>Reset</button>
 
-            <div>
-                <button onClick={reset}>Reset</button>
-                <button onClick={multiply}>×2</button>
-                <button onClick={threeTimes}>/3 if multiples of 3</button>
-
-            </div>
-
+            {console.log(name)}
         </>
     )
+}
+
+App.defaultProps = {
+    name: 'sample',
+    price: 1000,
 }
 
 export default App
