@@ -32,7 +32,7 @@ const events = (state = [], action) => {
             
             return state
         case 'DELETE_EVENT':
-            return state
+            return state.filter(event => event.id !== action.id)
         case 'CREATE_ALL_EVENTS':
             return []
         default:
